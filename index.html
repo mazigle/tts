@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAV Player</title>
+</head>
+
+<body>
+    <h1>WAV File Player</h1>
+    <button id="load-audio">Load and Play WAV</button>
+    <audio id="audio-player" controls></audio>
+
+    <script>
+        const button = document.getElementById('load-audio');
+        const audioPlayer = document.getElementById('audio-player');
+
+        button.addEventListener('click', async () => {
+            try {
+                // HTTP 요청을 통해 WAV 파일 가져오기
+                const data = {
+                    "text": "기억나 우리 처음 만난 날",
+                    "text_lang": "auto",
+                    "ref_audio_path": "audio/Yuuka_Gachaget.ogg.mp3",
+                    "aux_ref_audio_paths": [],
+                    "prompt_text": "",
+                    "prompt_lang": "ja",
+                    "top_k": 5,
+                    "top_p": 1,
+                    "temperature": 1,
+                    "text_split_method": "cut0",
+                    "batch_size": 1,
+                    "batch_threshold": 0.75,
+                    "split_bucket": true,
+                    "speed_factor": 1.0,
+                    "streaming_mode": false,
+                    "seed": -1,
+                    "parallel_infer": true,
+                    "repetition_penalty": 1.35  
+                };
+                const response = await fetch('http://localhost:9880/tts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                // Blob 데이터로 변환
+                const audioBlob = await response.blob();
+
+                // Blob 데이터를 Object URL로 변환하여 오디오 소스 설정
+                const audioURL = URL.createObjectURL(audioBlob);
+                audioPlayer.src = audioURL;
+
+                // 오디오 재생
+                audioPlayer.play();
+                console.log('Audio is playing!');
+            } catch (error) {
+                console.error('Error loading the audio file:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>
