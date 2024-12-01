@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WAV Player</title>
+    <title>mazigle</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -64,7 +64,7 @@
 </head>
 
 <body>
-    <h1>WAV File Player</h1>
+    <h1>Anime Voice Generator</h1>
     <div class="container">
         <textarea id="input-text" placeholder="Enter your text here...">기억나 우리 처음 만난 날</textarea>
         <button id="load-audio">Load and Play WAV</button>
@@ -104,7 +104,8 @@
                 };
 
                 // HTTP POST 요청 보내기
-                const response = await fetch('http://localhost:9880/tts', {
+                const url = 'https://9ns1ko8elceipc-9880.proxy.runpod.net/tts';
+                const response = await fetch(url, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
