@@ -66,8 +66,8 @@
 <body>
     <h1>Anime Voice Generator</h1>
     <div class="container">
-        <textarea id="input-text" placeholder="Enter your text here...">기억나 우리 처음 만난 날</textarea>
-        <button id="load-audio">Load and Play</button>
+        <textarea id="input-text" placeholder="Enter your text here...">It's not like I like you or anything!</textarea>
+        <button id="load-audio">Generate</button>
         <audio id="audio-player" controls></audio>
     </div>
 
@@ -85,10 +85,10 @@
                 const data = {
                     text: userText,
                     text_lang: "auto",
-                    ref_audio_path: "audio/Yuuka_Gachaget.ogg.mp3",
+                    ref_audio_path: "audio/luna-elon-musk-mars-10s.mp3",
                     aux_ref_audio_paths: [],
                     prompt_text: "",
-                    prompt_lang: "ja",
+                    prompt_lang: "en",
                     top_k: 5,
                     top_p: 1,
                     temperature: 1,
